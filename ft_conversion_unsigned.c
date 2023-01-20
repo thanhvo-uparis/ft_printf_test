@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 16:56:57 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/08 18:09:35 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/10 14:26:01 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int	ft_conversion_unsigned(unsigned int n)
 
 	str = ft_uitoa(n);
 	print_length = ft_conversion_str(str);
+	free(str);
 	return (print_length);
 }

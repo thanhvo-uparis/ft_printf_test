@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:52:10 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/08 18:15:25 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/20 11:28:12 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,38 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			print_length = ft_format(args, str[++i]);
+			print_length += ft_format(args, str[++i]);
 		}
 		else
+		{
 			write(1, &str[i], 1);
+			print_length++;
+		}
 		i++;
 	}
 	va_end(args);
 	return (print_length);
 }
 
-int	main()
-{
-	char i = 'h';
-	char x[] = "back hole &&";
-	int j = 57103;
-	int u = 256;
-	int hexa = 4019;
+// int	main()
+// {
+// 	char i = 'h';
+// 	char x[] = "back hole &&";
+// 	int j = 57103;
+// 	int u = 256;
+// 	int hexa = 4019;
+// 	void *ptr;
+// 	int num1 = 15;
+// 	int *p_int;
 
-	int res = ft_printf("Coucou %c %s %d %u\n", i, x, j, u);
-	int res2 = printf("Coucou %c %s %d %u %X\n", i, x, j, u, hexa);
-}
+// 	ptr = &num1;
+// 	p_int = (int *)ptr;
+// 	int res = ft_printf("Coucou %c %s %d %u %X %x %p\n", i, x, j, u, hexa, hexa, *p_int);
+// 	int res2 = printf("Coucou %c %s %d %u %X %x %p\n", i, x, j, u, hexa, hexa, &ptr);
+// 	// printf(" %p\n", -1);
+// 	// printf(" %p\n", 1);
+// 	// printf(" %p\n", 15);
+// 	// printf(" %p\n", 16);
+// 	// printf(" %p\n", 17);
+// 	ft_printf("%i\n", res - res2);
+// }
