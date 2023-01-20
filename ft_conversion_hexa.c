@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 20:53:11 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/08 18:09:15 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/20 17:02:11 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,43 @@ static int	ft_len_hex(unsigned int nb)
 	return (count);
 }
 
-int	ft_conversion_hexa(unsigned int nb, const char format)
+void	ft_printhexa(const char format, char res[], int *i)
 {
-	if (nb >= 16)
+	while (*i >= 0)
 	{
-		ft_conversion_hexa(nb / 16, format);
-		ft_conversion_hexa(nb % 16, format);
+		if (format == 'X' && res[*i] > '9')
+		{
+			ft_putchar_fd(res[*i] - 32, 1);
+			(*i)--;
+		}
+		else
+		{
+			ft_putchar_fd(res[*i], 1);
+			(*i)--;
+		}
+	}
+}
 
-	}
-	else if (nb > 0 && nb <= 9)
-		ft_putchar_fd((nb + '0'), 1);
-	else
+int	ft_conversion_hexa(unsigned int n, const char format)
+{
+	char	res[100];
+	int		i;
+	int		nb;
+
+	i = 0;
+	nb = n;
+	while (nb >= 16)
 	{
-		if (format == 'X')
-			ft_putchar_fd((nb - 10 + 'A'), 1);
-		else if (format == 'x')
-			ft_putchar_fd((nb - 10 + 'a'), 1);
+		res[i] = "0123456789abcdef"[nb % 16];
+		nb /= 16;
+		i++;
 	}
-	return (ft_len_hex(nb));
+	res[i] = "0123456789abcdef"[nb];
+	ft_printhexa(format, res, &i);
+	return (ft_len_hex(n));
 }
 
 // int main()
 // {
-// 	printf("\n%d", ft_conversion_hexa(4019, 'x'));
+// 	printf("\n%d", ft_conversion_hexa(27, 'X'));
 // }
